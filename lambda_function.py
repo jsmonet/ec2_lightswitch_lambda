@@ -1,12 +1,28 @@
 import os
 import boto3
+import sys
 from botocore.exceptions import ClientError
 
 # not that we change env vars later on, but for the sake of specificity,
 # let's use environ
 
-PREFIX = os.environ['PREFIX']
-REGION = os.environ['AWS_DEFAULT_REGION']
+error_list = []
+
+try:
+    PREFIX = os.environ['PREFIX']
+except KeyError as K:
+    error_list.append("PREFIX")
+    pass
+
+try:
+    REGION = os.environ['AWS_DEFAULT_REGION']
+except KeyError as K:
+    error_list.append("REGION")
+    pass
+
+if error_list:
+    print("The following environment variables have been left undefined: {}".format(error_list))
+    sys.exit(1)
 
 
 def gatherec2():
