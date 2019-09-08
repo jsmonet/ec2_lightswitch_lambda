@@ -121,7 +121,12 @@ def check_handler(event, context):
             else:
                 logger.info("{} has been started".format(item))
     elif SCRIPT_ACTION == "stop":
-        response = turn_on(instance_list)
+        response = turn_off(instance_list)
+        for item in response:
+            if response[item]['CurrentState'] == response[item]['PreviousState']:
+                logger.info("{} was already stopped".format(item))
+            else:
+                logger.info("{} has been stopped".format(item))
     else:
         logger.error("Your SCRIPT_ACTION environment variable is set to {}, which is not recognized. Please set it to either start or stop".format(SCRIPT_ACTION))
     return
