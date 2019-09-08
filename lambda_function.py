@@ -33,11 +33,11 @@ except KeyError as K:
     error_list.append("AWS_DEFAULT_REGION")
     pass
 
-try:
-    SCRIPT_ACTION = os.environ['SCRIPT_ACTION'].lower()
-except KeyError as K:
-    error_list.append("SCRIPT_ACTION")
-    pass
+# try:
+#     SCRIPT_ACTION = os.environ['SCRIPT_ACTION'].lower()
+# except KeyError as K:
+#     error_list.append("SCRIPT_ACTION")
+#     pass
 
 if error_list:
     msg = "The following environment variables have been left undefined: {}".format(error_list)
@@ -112,6 +112,7 @@ def check_handler(event, context):
     instance_list = find_by_prefix(PREFIX, all_ec2)
 
     logger.info(instance_list)
+    SCRIPT_ACTION = event["SCRIPT_ACTION"]
 
     if SCRIPT_ACTION == "start":
         response = turn_on(instance_list)

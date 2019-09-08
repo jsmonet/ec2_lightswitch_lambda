@@ -1,5 +1,4 @@
 {
   "PREFIX": "prelim",
-  "AWS_DEFAULT_REGION": "us-west-2",
-  "SCRIPT_ACTION": "stop"
+  "AWS_DEFAULT_REGION": "us-west-2"
 }
